@@ -12,13 +12,10 @@ from pyrogram.types import (
     InlineKeyboardButton as Button,
     )
 
-
-API_ID = int(input(
-    "\n[?] API_ID'yi girin:\n❯❯ "))
-API_HASH = input(
-    "\n[?] API_HASH'ı girin:\n❯❯ ")
-BOT_TOKEN = input(
-    "\n[?] BOT_TOKEN'i girin:\n❯❯ ")
+if not os.path.exists("HesapMakinesi.session"):
+    API_ID = int(input("\n[?] API_ID'yi girin:\n❯❯ "))
+    API_HASH = input("\n[?] API_HASH'ı girin:\n❯❯ ")
+    BOT_TOKEN = input("\n[?] BOT_TOKEN'i girin:\n❯❯ ")
 
 
 def clear():
@@ -38,7 +35,7 @@ casper_app = Client(
 
 
 @casper_app.on_message(filters.command(["start", "help"]))
-@casper_app.on_message(filters.regex(r"^([cC](al(culator)?)?|[hH](esap(la(makinesi)?|mak)?))$"))
+@casper_app.on_message(filters.regex(r"\b(?:[Cc]al(?:c(?:ulator)?)?|[Hh]esap(?:la(?:mak)?| makinesi)?)\b"))
 async def start(_: Client, message: Message) -> None:
     user_id: int = message.from_user.id
     caption: str = "İşleminizi Girin:\n\n|"
